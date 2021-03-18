@@ -130,7 +130,7 @@ export class CalculadoraController {
     const nombreUsuario = hearderparams.nombre;
     let valorCok = cookietemp[nombreUsuario];
     if (!nombreUsuario || cookietemp[nombreUsuario] == undefined) {
-      return 'Ingrese el nombre de usuario';
+      return 'Ingrese el nombre de Usuario';
     }
     const resultado = hearderparams.numero1 / hearderparams.numero2;
     valorCok = valorCok - resultado;

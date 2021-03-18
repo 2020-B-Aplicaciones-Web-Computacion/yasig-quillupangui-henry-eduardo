@@ -25,11 +25,11 @@ export class AppController {
       session.usuario = {
         nombre: parametrosConsulta.nombre,
         apellido: parametrosConsulta.apellido,
-      };
-      if (parametrosConsulta.apellido === 'Murgueytio') {
-        session.usuario.esAdministrador = true;
       }
-      return 'Se logeo el usuario';
+      if(parametrosConsulta.apellido ==='yasig'){
+        session.usuario.esAdministrador=true;
+      }
+      return 'Se logeo el Usuario';
     } else {
       throw new BadRequestException('NO ENVIA NOMBRE Y APELLIDO'); //400
     }
