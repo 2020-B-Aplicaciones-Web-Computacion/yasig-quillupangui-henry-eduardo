@@ -1,22 +1,26 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import {NestFactory} from '@nestjs/core';
+import {AppModule} from './app.module';
 import * as cookieParser from 'cookie-parser';
 
 const helmet = require('helmet');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
-var fileStoreOprions = {};
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+var fileStoreOptions = {};
+
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app: any = await NestFactory.create(AppModule);
+  app.set('view engine', 'ejs');
   app.use(session({
-    store: new FileStore(fileStoreOprions),
-    secret: 'SUPER SECRETO'
-  }))
+    store: new FileStore(fileStoreOptions),
+    secret: 'SUPER SECRETO',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      // expires: new Date(Date.now() + (10 * 1000))
+    }
+  }));
   app.use(cookieParser());
   app.use(helmet());
-
   await app.listen(3000);
 }
 
