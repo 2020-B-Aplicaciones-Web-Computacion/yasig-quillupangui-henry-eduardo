@@ -1,18 +1,24 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
-import {UsuarioEntity} from '../usuario/usuario.entity';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { UsuarioEntity } from '../usuario/usuario.entity';
 
 @Entity('EPN_MASCOTA')
 export class MascotaEntity {
-    @PrimaryGeneratedColumn()
-    id: number
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    nombre: string
+  @Column()
+  nombre: string;
 
-    // ManyToOne (Hijo) MascotaEntity
-    @ManyToOne(
-        type => UsuarioEntity, // Clase de le entidad papa
-        usuario => usuario.mascotas)
-    fkUsuario;
-
+  // ManyToOne (Hijo) MascotaEntity
+  @ManyToOne(
+    (type) => UsuarioEntity, // Clase de le entidad papa
+    (usuario) => usuario.mascotas,
+  )
+  fkUsuario;
 }
