@@ -1,0 +1,39 @@
+<body bgcolor=#ffffe0>
+<h2>EDITAR SUCURSALES<h2>
+
+<% let matriz = datos %>
+<h3><form action="/matriz/editar?id=<%= params.id %>" method="post">
+        <br>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" name="nombre" placeholder="<%= matriz.nombre %>">
+    </br>
+        <br>
+    <label for="direccion">Direccion</label>
+    <input id="direccion" type="text" name="direccion" placeholder="<%= matriz.direccion %>">
+    </br>
+        <br>
+    <label for="empleados">Empleados</label>
+    <input id="empleados" type="text" name="empleados" placeholder="<%= matriz.empleados %>">
+    </br>
+        <br>
+    <label for="horario">Horario</label>
+    <input id="horario" type="text" name="horario" placeholder="<%= matriz.horario %>">
+    </br>
+        <br>
+        <label for="estado">Estado</label>
+    </br>
+        <br>
+        <input type="radio"  name="estado" value="estado">
+        <label for="estado">Activo</label></br>
+        </br>
+        <input type="radio"  name="estado" value="estado">
+        <label for="estado">Inactivo</label></br>
+
+        <br>
+    <button type="submit">Modificar</button>
+    <button type="reset">Borrar</button>
+        </br>
+</form><h3>
+<a href="/matriz/matrices">
+    <button>Cancelar</button>
+</a>

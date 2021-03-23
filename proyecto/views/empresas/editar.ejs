@@ -1,0 +1,37 @@
+<body bgcolor=#ffffe0>
+<h2>EDITAR EMPRESA<h2>
+
+<% let empresa = datos %>
+<h3><form action="/empresa/editar?id=<%= params.id %>" method="post">
+    <br>
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" name="nombre" placeholder="<%= empresa.nombre %>">
+    </br>
+    <br>
+    <label for="ubicacion">Ubicación</label>
+    <input id="ubicacion" type="text" name="ubicacion" placeholder="<%= empresa.ubicacion %>">
+    </br>
+    <br>
+    <label for="creacion">Creación</label>
+    <input id="creacion" type="text" name="creacion" placeholder="<%= empresa.creacion %>">
+    </br>
+    <br>
+    <label for="presidente">Presidente</label>
+    <input id="presidente" type="text" name="presidente" placeholder="<%= empresa.presidente %>">
+    </br>
+    <br>
+    <label for="ingresos">Ingresos</label>
+    <input id="ingresos" type="text" name="ingresos" placeholder="<%= empresa.ingresos %>">
+    </br>
+    <br>
+    <label for="empleados">Empleados</label>
+    <input id="empleados" type="text" name="empleados" placeholder="<%= empresa.empleados %>">
+    </br>
+        <br>
+    <button type="submit">Editar</button>
+    <button type="reset">Borrar</button>
+        </br>
+    </form><h3>
+<a href="/empresa/empresas">
+    <button>Cancelar</button>
+</a>

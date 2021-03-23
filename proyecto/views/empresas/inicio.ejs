@@ -1,0 +1,104 @@
+<body bgcolor=#ffffe0>
+<h2> EMPRESAS <h2>
+<h4>
+<form action="/empresa/empresas" method="get">
+    <label for="busqueda">Búsqueda</label>
+    <input id="busqueda" type="text" name="busqueda">
+
+    <button type="submit">
+        Buscar
+    </button>
+</form>
+
+<style>
+
+    .mensaje {
+        border: solid 1px #c3a062;
+        width: 100%;
+    }
+
+     table {
+         width: 100%;
+         border: 1px solid #000;
+     }
+
+    th,
+    td {
+        width: 25%;
+        text-align: left;
+        vertical-align: top;
+        border: 1px solid #000;
+        border-collapse: collapse;
+        padding: 0.3em;
+        caption-side: bottom;
+    }
+
+    caption {
+        padding: 0.3em;
+        color: #fff;
+        background: #000;
+    }
+
+    th {
+        background: #eee;
+    }
+
+</style>
+
+<% if(parametrosConsulta.mensaje){ %>
+    <div class="mensaje">
+        <%= parametrosConsulta.mensaje %>
+    </div>
+<% } %>
+
+<a href="/empresa/crear-empresa">
+    <button>CREAR</button>
+</a>
+<h4>
+<table>
+    <caption>EMPRESAS</caption>
+    <tr>
+        <th>Nombre</th>
+        <th>Ubicación</th>
+        <th>Creación</th>
+        <th>Presidente</th>
+        <th>Ingresos</th>
+        <th>Empleados</th>
+    </tr>
+    <% for (let empresa of datos[0]){ %>
+        <% let fk = empresa.id%>
+        <% let id = empresa.id %>
+        <tr>
+            <td><%= empresa.nombre %></td>
+            <td><%= empresa.ubicacion %></td>
+            <td><%= empresa.creacion %></td>
+            <td><%= empresa.presidente %></td>
+            <td><%= empresa.ingresos %></td>
+            <td><%= empresa.empleados %></td>
+            <td>
+                <a href="/empresa/editar?id=<%=id%>">
+                    <button>Editar</button>
+                </a>
+                <a href="/empresa/eliminar?id=<%=id%>">
+                    <button>Eliminar</button>
+                </a>
+                <a href="/matriz/matrices?empresa=<%=fk%>">
+                    <button>Matrices</button>
+                </a>
+            </td>
+        </tr>
+    <% } %>
+</table>
+    <br>
+<% if(page>1){%>
+<a href="/empresa/empresas?page=<%=page-1%>">
+    <button>Anterior</button>
+</a>
+<%}%>
+    </br>
+    <br>
+<a href="/empresa/empresas?page=<%=page+1%>">
+    <button>Siguiente</button>
+</a>
+    </br>
+    <body>

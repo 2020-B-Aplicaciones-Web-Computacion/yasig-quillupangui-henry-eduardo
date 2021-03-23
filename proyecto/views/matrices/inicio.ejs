@@ -1,0 +1,104 @@
+<body bgcolor=#ffffe0>
+<h2> SUCURSALES <h2>
+<h4>
+
+<form action="/matriz/matrices" method="get">
+    <label for="busqueda">Búsqueda</label>
+    <input id="busqueda" type="text" name="busqueda">
+
+    <button type="submit">
+        Buscar
+    </button>
+</form>
+
+<style>
+    .mensaje {
+        border: solid 1px #c3a062;
+        width: 100%;
+    }
+    table {
+        width: 100%;
+        border: 1px solid #000;
+    }
+
+    th,
+    td {
+        width: 25%;
+        text-align: left;
+        vertical-align: top;
+        border: 1px solid #000;
+        border-collapse: collapse;
+        padding: 0.3em;
+        caption-side: bottom;
+    }
+
+    caption {
+        padding: 0.3em;
+        color: #fff;
+        background: #bf8f8f;
+    }
+
+    th {
+        background: #eee;
+    }
+
+
+</style>
+
+<% if(parametrosConsulta.mensaje){ %>
+    <div class="mensaje">
+        <%= parametrosConsulta.mensaje %>
+    </div>
+<% } %>
+
+    <br>
+<a href="/matriz/crear-matriz">
+
+    <button>CREAR</button>
+</a>
+    </br>
+</h4>
+<table>
+    <caption>SUCURSALES</caption>
+    <tr>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Empleados</th>
+        <th>Horario</th>
+        <th>Estado</th>
+    </tr>
+    <% for (let matriz of datos[0]){ %>
+        <% let id = matriz.id %>
+        <% let fk = matriz.id%>
+        <tr>
+            <td><%= matriz.nombre %></td>
+            <td><%= matriz.direccion %></td>
+            <td><%= matriz.empleados %></td>
+            <td><%= matriz.horario %></td>
+            <td><%= matriz.estado %></td>
+            <td>
+                <a href="/matriz/editar?id=<%= id %>">
+                    <button>Editar</button>
+                </a>
+                <a href="/matriz/eliminar?id=<%= id %>">
+                    <button>Eliminar</button>
+                </a>
+            </td>
+        </tr>
+    <% } %>
+</table>
+<% if(page > 1){ %>
+<a href="/matriz/matrices?empresa=<%=parametrosConsulta.empresa%>&&page=<%= page - 1 %>">
+    <button>Anterior</button>
+</a>
+<% } %>
+        <br>
+<a href="/matriz/matrices?empresa=<%=parametrosConsulta.empresa%>&&page=<%= page + 1 %>">
+    <button>Siguiente</button>
+</a>
+        </br>
+<br>
+<a href="/empresa/empresas">
+    <button>Regresar a Empresas</button>
+</a>
+        </br>

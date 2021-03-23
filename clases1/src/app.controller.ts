@@ -1,18 +1,43 @@
 import {
-  BadRequestException,
+  BadRequestException, Body,
   Controller,
   ForbiddenException,
-  Get,
-
+  Get, HttpCode, Post,
   Query,
   Req,
   Session,
 } from '@nestjs/common';
+import path from 'node:path';
 import { AppService } from './app.service';
+import {FormularioCrearDto} from "./dto/formulario-crear.dto";
+import {validate} from "class-validator";
+import objectContaining = jasmine.objectContaining;
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
+
+  @Post('validacion-formulario')
+  async validacionFormulario(
+      @Body() parametrosCuerpo
+  ) {
+      const dtoFormulario= new FormularioCrearDto();
+      dtoFormulario.nombre=parametrosCuerpo.nombre;
+      dtoFormulario.cedula=parametrosCuerpo.cedula;
+      dtoFormulario.correo=parametrosCuerpo.correo;
+      dtoFormulario.edad=parametrosCuerpo.edad;
+      dtoFormulario.soltero=parametrosCuerpo.soltero;
+      const errores =await validate (dtoFormulario);
+      if (errores.length > 0){
+        console.error(JSON.stringify(errores))
+        console.error(errores.toString());
+        throw new BadRequestException(objectContaining('no envia correctamente los parametros'))
+      }else{
+        return 'ok';
+      }
+
+
+  }
 
   @Get()
   getHello(): string {
@@ -25,9 +50,9 @@ export class AppController {
       session.usuario = {
         nombre: parametrosConsulta.nombre,
         apellido: parametrosConsulta.apellido,
-      }
-      if(parametrosConsulta.apellido ==='yasig'){
-        session.usuario.esAdministrador=true;
+      };
+      if (parametrosConsulta.apellido === 'yasig') {
+        session.usuario.esAdministrador = true;
       }
       return 'Se logeo el Usuario';
     } else {
